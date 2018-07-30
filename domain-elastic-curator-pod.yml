@@ -1,11 +1,11 @@
 kapiVersion: v1
 kind: Pod
 metadata:
-  name: domain-elastic-curator
+  name: domain-elastic-curator-pod
 spec:
   containers:
     - name: curator
-      image: <artifact.domain.name>.com/domain-elastic-curator
+      image: <artifact.domain.name>.com/domain-elastic-curator-pod
       resources: 
         limits: 
             cpu: 200m 
