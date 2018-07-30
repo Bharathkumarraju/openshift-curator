@@ -1,0 +1,14 @@
+---
+client:
+  hosts:
+    - <dns-name or host IP>
+  port: 9200
+  http_auth: ${ES_USER_PWD}
+  certificate: /config/<certificate-name>
+  use_ssl: True
+  timeout: 30
+  master_only: False
+  ssl_no_validate: True
+logging:
+  loglevel: INFO
+  logformat: default
