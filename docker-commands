@@ -1,10 +1,7 @@
-docker images dangling=true
-docker build -t <artifact domain.name>:5000/edmi-elastic-curator .
-docker push <artifact domain.name>:5000/edmi-elastic-curator
-docker image -ls
-docker ps
+docker build -t <artifact domain.name>:5000/domain-elastic-curator .
+docker push <artifact domain.name>:5000/domain-elastic-curator
 
-#Artifcate commands
+#sample artifcate commands
 
 #!/bin/bash
 for file in `find ./ -type f`
