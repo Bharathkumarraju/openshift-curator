@@ -1,6 +1,8 @@
-```docker build -t <artifact domain.name>:5000/domain-elastic-curator .
 ```
-```docker push <artifact domain.name>:5000/domain-elastic-curator
+docker build -t <artifact domain.name>:5000/domain-elastic-curator .
+```
+```
+docker push <artifact domain.name>:5000/domain-elastic-curator
 ```
 ## Running the tests
 ```oc create -f domain-curator-secret.yml
