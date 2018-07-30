@@ -1,0 +1,33 @@
+FROM python:3.6-alpine
+
+RUN pip install  elasticsearch-curator==5.5.4 -i https://<artifcate.domain.name>/artifactory/api/pypi/pypi-release/simple &&\
+    rm -rf /var/cache/apk/*
+
+COPY ./config/ /config
+
+RUN /usr/bin/crontab /config/crontab.txt
+
+CMD ["/usr/sbin/crond","-f"]
+
+
+docker images dangling=true
+docker build -t <artifact domain.name>:5000/edmi-elastic-curator .
+docker push <artifact domain.name>:5000/edmi-elastic-curator
+docker image -ls
+docker ps
+
+#Artifcate commands
+
+#!/bin/bash
+for file in `find ./ -type f`
+do
+export md5=$( md5sum ${file}|cut -f1 -d' ' )
+filename=$( echo ${file}|sed 's#./##' )
+curl -X PUT -T ${file} -H "Content-MD5: ${md5}" -u <username>:<password> http://<artifact.domain.name>:8081/artifactory/<subfolder>/fix-patch/<product-folder>/${filename}
+done
+========
+exec 3<> /tmp/foo
+echo "test" >&3
+exec 3>&-
+cat 3
+cat '&3'
