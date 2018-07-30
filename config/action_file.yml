@@ -1,0 +1,63 @@
+actions:
+  1:
+    action: delete_indices
+    description: >-
+      Delete indices older than 7 days
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: False
+    filters:
+    - filtertype: pattern
+      kind: regex
+      value: ^(<any-logs>|metricbeat|server-logs-1).*$
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 7
+      exclude:
+  2:
+    action: delete_indices
+    description: >-
+      Delete data older than 60 days for audit index
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: False
+    filters:
+    - filtertype: pattern
+      kind: regex
+      value: ^(<any-logs-2>|server-logs-2).*$
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 60
+      exclude:
+  3:
+    action: delete_indices
+    description: >-
+      Delete system indices older than 45 days
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: False
+    filters:
+    - filtertype: pattern
+      kind: regex
+      value: ^(.monitoring-es-2|.monitoring-kibana-2|.reporting|.watcher-history-3).*$
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 60
